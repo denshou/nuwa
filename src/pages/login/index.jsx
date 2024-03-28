@@ -9,7 +9,7 @@ const LoginPage = () => {
   const error = searchParams.get('error');
 
   if (error) {
-    alert(btoa(error));
+    alert(atob(error));
   }
 
   return (
