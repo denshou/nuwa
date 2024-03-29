@@ -20,9 +20,13 @@ import CanvasEditModal from '@components/Modal/EditCanvas/index.jsx';
 import useBoundStore from '../../store/store';
 const Canvas = () => {
   const { setUploadType, uploadType } = useBoundStore();
-  if (uploadType !== 'CANVAS') {
-    setUploadType('CANVAS');
-  }
+
+  useEffect(() => {
+    if (uploadType !== 'CANVAS') {
+      setUploadType('CANVAS');
+    }
+  }, []);
+
   const { isOpen, onOpen, onClose } = useModal();
   const {
     isOpen: isEditModalOpen,
@@ -180,7 +184,6 @@ const DataContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  cursor: pointer;
   overflow-y: auto;
 `;
 

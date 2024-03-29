@@ -29,9 +29,12 @@ const DirectChatPage = () => {
     setUploadType,
     uploadType,
   } = useBoundStore();
-  if (uploadType !== 'DIRECT') {
-    setUploadType('DIRECT');
-  }
+
+  useEffect(() => {
+    if (uploadType !== 'DIRECT') {
+      setUploadType('DIRECT');
+    }
+  }, []);
   const { chatRoomInfo, userProfile } = useLoaderData();
   const { roomId, workSpaceId } = useParams();
 

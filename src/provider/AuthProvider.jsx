@@ -21,17 +21,17 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
   //  토큰 재발행
-  useInterval(() => {
-    if (getToken()) {
-      try {
-        reissueToken();
-      } catch {
-        removeToken();
-        setIsLoggedIn(false);
-        navigate('/login');
-      }
-    }
-  }, 25 * 60 * 1000);
+  // useInterval(() => {
+  //   if (getToken()) {
+  //     try {
+  //       reissueToken();
+  //     } catch {
+  //       removeToken();
+  //       setIsLoggedIn(false);
+  //       navigate('/login');
+  //     }
+  //   }
+  // }, 25 * 60 * 1000);
 
   //todo 뒤로가기  제어
 

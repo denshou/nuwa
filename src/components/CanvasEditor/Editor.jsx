@@ -3,6 +3,7 @@ import Quill from 'quill';
 import { useParams } from 'react-router-dom';
 import { imageMatcher } from '@components/TextEditorFunctionalComponent/quill/clipboard';
 import useBoundStore from '../../store/store';
+import { imageHandler } from '../TextEditorFunctionalComponent/quill/customOptions';
 
 const Editor = forwardRef(
   (
@@ -32,8 +33,21 @@ const Editor = forwardRef(
       );
 
       const quill = new Quill(editorContainer, {
+        externalLayer: { uploadType },
         theme: 'snow',
-        modules: {},
+        modules: {
+          toolbar: {
+            container: [
+              ['bold', 'italic', 'underline', 'strike'],
+              ['blockquote', 'code-block'],
+              ['link', 'image'],
+              [{ list: 'ordered' }, { list: 'bullet' }],
+            ],
+            handlers: {
+              image: imageHandler,
+            },
+          },
+        },
       });
 
       quill.clipboard.addMatcher('img', function (node) {
@@ -63,6 +77,19 @@ const Editor = forwardRef(
       return () => {
         ref.current = null;
         container.innerHTML = '';
+      };
+    }, []);
+
+    useEffect(() => {
+      const handleEmptyEditorClick = () => {
+        ref.current.focus({ preventScroll: true });
+        ref.current.setSelection(ref.current.getLength(), 0);
+      };
+      const element = document.querySelector('.canvas .ql-container.ql-snow');
+      element.addEventListener('click', handleEmptyEditorClick);
+
+      return () => {
+        element.removeEventListener('click', handleEmptyEditorClick);
       };
     }, []);
 

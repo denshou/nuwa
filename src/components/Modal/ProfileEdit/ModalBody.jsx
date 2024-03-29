@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import {
   updateProfile,
   uploadProfileImage,
@@ -9,13 +9,15 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Image,
   Box,
   Divider,
   Text,
   Flex,
+  Avatar,
+  AvatarBadge,
 } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
+import { AddIcon } from '@chakra-ui/icons';
 
 const EditableField = ({
   label,
@@ -195,14 +197,26 @@ const ModalBody = ({ profile, onSave, onClose }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Box textAlign="center" py={5}>
-        <Image
-          src={imagePreview || profile.image}
-          boxSize="100px"
-          borderRadius="full"
-          mx="auto"
+        <Avatar
+          src={profile.image}
+          name={profile.name}
+          // boxSize="100px"
+          size={'2xl'}
           cursor="pointer"
           onClick={triggerFileInput}
-        />
+          position={'relative'}
+        >
+          <AvatarBadge
+            border={'4px'}
+            borderColor="papayawhip"
+            bg="#575DF8"
+            boxSize="0.75em"
+            position={'absolute'}
+            left={'1.5em'}
+          >
+            <AddIcon boxSize={'1rem'} color={'white'} />
+          </AvatarBadge>
+        </Avatar>
         <Input
           ref={fileInputRef}
           type="file"
@@ -230,8 +244,10 @@ const ModalBody = ({ profile, onSave, onClose }) => {
       <div>
         <UserStatusDisplay status={profile.status} />
       </div>
-      <Divider color="#898989" my={5} />
-      <Flex>
+      {/* <Divider color="#898989" my={5} /> */}
+
+      {/*  연락처 정보 날리기/ view만 필요하거나 아예 날리기 */}
+      {/* <Flex>
         <Text color="#434343" fontSize="20px" fontWeight="bold">
           연락처 정보
         </Text>
@@ -249,7 +265,7 @@ const ModalBody = ({ profile, onSave, onClose }) => {
           onChange={(value) => handleFieldChange('phone', value)}
           fontSize="md"
         />
-      </Box>
+      </Box> */}
 
       <Divider color="#898989" my={5} />
       <Flex>
