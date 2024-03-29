@@ -48,12 +48,20 @@ const WorkspaceLayout = () => {
 
         switch (data.notificationType) {
           case 'DIRECT':
-            title = `${data.notificationSenderName}님의 다이렉트 메세지`;
-            description = `${data.notificationContent}`;
+            description = `${data.notificationSenderName}님의 다이렉트 메세지`;
+            title = `${data.notificationContent}`;
             break;
           case 'CHAT':
-            title = `${data.notificationContent}`;
-            description = `그룹채팅의 알림이 도착하였습니다.`;
+            description = `${data.notificationContent}`;
+            title = `그룹채팅의 알림이 도착하였습니다.`;
+            break;
+          case 'CANVAS':
+            title = `새로운 캔버스가 생성되었습니다.`;
+            description = `${data.notificationContent}`;
+            break;
+          case 'NOTICE':
+            title = `사용자 권한이 변경되었습니다.`;
+            description = `${data.notificationContent}`;
             break;
         }
 
