@@ -40,6 +40,7 @@ const AlarmData = ({
   count,
   onRead,
   notificationId,
+  onClose,
 }) => {
   const { workSpaceId } = useParams();
   const navigate = useNavigate();
@@ -49,7 +50,9 @@ const AlarmData = ({
   const confirmationMessage = boolean ? '확인' : '미확인';
 
   const handleClick = () => {
+    onClose();
     navigate(`/workspace/${workSpaceId}${url}`);
+
     onRead(notificationId, type, setIsRead);
   };
 

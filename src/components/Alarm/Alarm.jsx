@@ -83,6 +83,7 @@ const Alarm = () => {
             <Button
               onClick={() => {
                 readAllNotification(workSpaceId);
+                onClose();
               }}
               fontSize={'sm'}
             >
@@ -107,6 +108,7 @@ const Alarm = () => {
                     count={alarm.contentCount}
                     notificationId={alarm.notificationId}
                     onRead={handleReadNotification}
+                    onClose={onClose}
                   />
                 ))}
               </Box>
