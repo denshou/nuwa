@@ -32,7 +32,9 @@ export const dateToHourMinute = (dateString) => {
     amOrPm = '오후';
     hours -= 12;
   }
-  return `${amOrPm} ${hours}시 ${minutes}분`;
+  return minutes === 0
+    ? `${amOrPm} ${hours}시`
+    : `${amOrPm} ${hours}시 ${minutes}분`;
 };
 
 export const utcToKoreanTime = (utcTimeString) => {

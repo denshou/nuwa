@@ -26,9 +26,11 @@ const GroupChatPage = () => {
   const { messageIndex, setMessageIndex, setUploadType, uploadType } =
     useBoundStore();
 
-  if (uploadType !== 'CHAT') {
-    setUploadType('CHAT');
-  }
+  useEffect(() => {
+    if (uploadType !== 'CHAT') {
+      setUploadType('CHAT');
+    }
+  }, []);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const { workSpaceId, roomId } = useParams();
 

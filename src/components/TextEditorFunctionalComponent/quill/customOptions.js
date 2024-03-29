@@ -30,7 +30,7 @@ export const myOptions = {
   },
 };
 
-function imageHandler() {
+export function imageHandler() {
   const { workSpaceId, channelId, uploadType } =
     this.quill.options.externalLayer;
   const fileRequestDto = {

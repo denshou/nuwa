@@ -20,6 +20,7 @@ const CanvasData = ({
 
   return (
     <Box
+      cursor={'pointer'}
       display="flex"
       gap="10px"
       border="1px solid grey"

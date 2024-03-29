@@ -30,3 +30,10 @@ export const getGroupChatInfo = (workSpaceId, chatChannelRoomId) =>
       chatChannelRoomId,
     },
   });
+
+export const getGroupMemberNotInGroup = (workSpaceId, chatChannelRoomId) =>
+  request.get(`/channel/chat/info/member/${workSpaceId}`, {
+    params: {
+      chatChannelRoomId,
+    },
+  });

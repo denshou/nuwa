@@ -1,10 +1,14 @@
 import { imgRequest } from '../axios/axios';
 
 export const uploadFile = (fileType, channelId, body) => {
-  return imgRequest.post(
-    `/file/upload?fileType=${fileType}&channelId=${channelId}`,
-    body
-  );
+  if (fileType !== 'CANVAS') {
+    return imgRequest.post(
+      `/file/upload?fileType=${fileType}&channelId=${channelId}`,
+      body
+    );
+  } else {
+    return imgRequest.post(`/file/upload?fileType=${fileType}`, body);
+  }
 };
 
 export const uploadFileTest = (fileType, channelId, body, body2) => {
