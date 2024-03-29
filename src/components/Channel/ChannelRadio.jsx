@@ -26,6 +26,7 @@ const ChannelRadio = ({ name, RadioConstants, value, setValue }) => {
                 colorScheme="gray"
                 value={item.value}
                 borderColor={'gray'}
+                isDisabled={item.value === 'voice'}
               />
             </Flex>
           ))}
