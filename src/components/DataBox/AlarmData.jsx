@@ -16,6 +16,8 @@ const getIcon = (type) => {
       return Todo;
     case 'CHAT':
       return Chat;
+    case 'NOTICE':
+      return Todo;
     default:
       return null;
   }
@@ -27,6 +29,7 @@ const getMessage = (type, partner, count) => {
     CANVAS: '새로운 캔버스가 생성되었습니다.',
     TODO: '새로운 투두리스트가 생성되었습니다.',
     CHAT: `그룹채팅에 ${partner}님이 새로운 메세지를 작성하였습니다.`,
+    NOTICE: `사용자 권한이 변경되었습니다.`,
   };
 
   return messages[type] || '알 수 없는 타입이 생성되었습니다.';
