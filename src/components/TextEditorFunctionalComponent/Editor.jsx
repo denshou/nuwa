@@ -99,6 +99,11 @@ const Editor = forwardRef(
       };
     }, [publish]);
 
+    useEffect(() => {
+      if (ref.current) {
+        ref.current.focus({ preventScroll: true });
+      }
+    }, [publish, channelId]);
     return (
       <Box flexGrow={0}>
         <EmojiPicker

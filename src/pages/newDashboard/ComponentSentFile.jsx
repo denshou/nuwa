@@ -10,10 +10,17 @@ import {
   Tr,
   Th,
   Td,
+  Tooltip,
 } from '@chakra-ui/react';
 import FilesIconTitle from '@assets/files_icon.svg';
 import { useParams } from 'react-router-dom';
 import { getTopFiles } from '@apis/dashboard/getTopFiles';
+import {
+  getDiffFromCurrent,
+  go,
+  utcToKoreanTime,
+  writeTimeStringFromDiff,
+} from '../../utils/date';
 
 const ComponentSentfile = () => {
   const [files, setFiles] = useState([]);
@@ -67,8 +74,27 @@ const ComponentSentfile = () => {
             {files.length > 0 ? (
               files.map((file, index) => (
                 <Tr key={index}>
-                  <Td>{file.fileName}</Td>
-                  <Td>{file.createdAt}</Td>
+                  <Td>
+                    <Tooltip
+                      label={file.fileName}
+                      bg={'gray.50'}
+                      color={'black'}
+                      padding={2}
+                      rounded={'sm'}
+                    >
+                      {file.fileName?.length > 20
+                        ? file.fileName.slice(0, 20) + ' .... '
+                        : file.fileName}
+                    </Tooltip>
+                  </Td>
+                  <Td>
+                    {go(
+                      file.createdAt,
+                      utcToKoreanTime,
+                      getDiffFromCurrent,
+                      writeTimeStringFromDiff
+                    )}
+                  </Td>
                   <Td>{file.fileExtension}</Td>
                   <Td>{file.fileSize}</Td>
                 </Tr>
