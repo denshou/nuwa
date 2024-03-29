@@ -8,17 +8,9 @@ const LoginPage = () => {
 
   const error = searchParams.get('error');
 
-  // console.log(
-  //   decodeURIComponent(
-  //     encodeURI(
-  //       atob(
-  //         'R29vZ2xlIOqzhOygleycvOuhnCDsnbTrr7gg6rCA7J6F65CY7Ja0IOyeiOyKteuLiOuLpC4gR29vZ2xlIOqzhOygleycvOuhnCDroZzqt7jsnbgg7ZW07KO87IS47JqULg%3D%3D'
-  //       )
-  //     )
-  //   )
-  // );
   if (error) {
-    alert(atob(error));
+    const result = new TextDecoder().decode(base64ToBytes(error)); // "a Ā 𐀀 文 🦄"
+    alert(result);
   }
 
   return (
@@ -49,3 +41,8 @@ const StContainerWrap = styled.div`
 `;
 
 // #ffffff   #fafbfd    #f6f8fb             #f1f4f9
+
+function base64ToBytes(base64) {
+  const binString = atob(base64);
+  return Uint8Array.from(binString, (m) => m.codePointAt(0));
+}
