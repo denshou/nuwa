@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Flex, Text, Button } from '@chakra-ui/react';
 import mainTool from '@assets/mainpage1.jpg';
@@ -6,16 +6,13 @@ import mainTool2 from '@assets/mainpage2.jpg';
 import mainTool3 from '@assets/mainpage2_1.jpg';
 import mainTool4 from '@assets/mainpage2_2.jpg';
 import mainTool5 from '@assets/mainpage3.jpg';
-import { useNavigate } from 'react-router-dom';
+import useFreeTrialRedirect from '../../hooks/auth/useFreeTrialRedirect';
 
 const images = [mainTool, mainTool2, mainTool3, mainTool4, mainTool5]; // 이미지 배열
 
 const MainHeader = () => {
   const [currentImage, setCurrentImage] = useState(0);
-  const navigate = useNavigate();
-  const handleButtonClick = () => {
-    navigate('/create-workspace');
-  };
+  const { handleButtonClick } = useFreeTrialRedirect();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -87,7 +84,7 @@ const MainHeader = () => {
             borderRadius="full"
             bgColor="#575DF8"
           >
-            무료로시작하기
+            무료로 시작하기
           </Button>
         </StTextBox>
 

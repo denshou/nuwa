@@ -1,10 +1,12 @@
 import styled from 'styled-components';
-import { Flex, Text, Box, Button } from '@chakra-ui/react';
+import { Flex, Text, Button } from '@chakra-ui/react';
 import FeatCard from './FeatCard';
 import circle_arrow from '@assets/circle_arrow.png';
 import { SELECT_FEAT_INFO } from '@constants/selectPlan/SELECT_FEAT_INFO';
+import useFreeTrialRedirect from '../../hooks/auth/useFreeTrialRedirect';
 
 const FeatCenter = () => {
+  const { handleButtonClick } = useFreeTrialRedirect();
   return (
     <StContainer>
       <FeatSection>
@@ -38,6 +40,7 @@ const FeatCenter = () => {
             color="white"
             borderRadius="full"
             bgColor="#575DFB"
+            onClick={handleButtonClick}
           >
             무료로 시작하기
           </Button>
