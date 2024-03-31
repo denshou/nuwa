@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { AddIcon } from '@chakra-ui/icons';
+import { useWorkspaceUserProfilePatchMutation } from '../../../queries/workspaceProfile';
 
 const EditableField = ({
   label,
@@ -109,10 +110,13 @@ const UserStatusDisplay = ({ status }) => {
 
 const ModalBody = ({ profile, onSave, onClose }) => {
   const [editedProfile, setEditedProfile] = useState(profile);
+  console.log(editedProfile);
   //  const [userStatus, setUserStatus] = useState(profile.status);
   const { workSpaceId } = useParams();
   const [imagePreview, setImagePreview] = useState(profile.image?.url || '');
   const fileInputRef = useRef(null);
+
+  const { mutateAsync } = useWorkspaceUserProfilePatchMutation(workSpaceId);
 
   const handleFieldChange = (field, value) => {
     setEditedProfile((prev) => ({
@@ -179,8 +183,8 @@ const ModalBody = ({ profile, onSave, onClose }) => {
         workSpaceMemberJob: editedProfile.job,
       };
 
-      await updateProfile(workSpaceId, profileData);
-
+      // await updateProfile(workSpaceId, profileData);
+      await mutateAsync(profileData);
       if (editedProfile.newPassword) {
         await changePassword(editedProfile.newPassword);
         alert('비밀번호가 성공적으로 변경되었습니다.');
@@ -198,7 +202,7 @@ const ModalBody = ({ profile, onSave, onClose }) => {
     <form onSubmit={handleSubmit}>
       <Box textAlign="center" py={5}>
         <Avatar
-          src={profile.image}
+          src={imagePreview}
           name={profile.name}
           // boxSize="100px"
           size={'2xl'}
