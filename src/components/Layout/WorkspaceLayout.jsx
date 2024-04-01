@@ -14,6 +14,7 @@ import { Fragment, useEffect, useState } from 'react';
 import useWorkspaceMemberGuard from '@hooks/auth/useWorkspaceMemberGuard';
 import { jwtDecode } from 'jwt-decode';
 import { getToken } from '../../utils/auth';
+import useSmallScreenGuard from '../../hooks/useSmallScreenGuard';
 
 const WorkspaceLayout = () => {
   const { isAuthChecked } = useAuthGuard();
@@ -22,7 +23,6 @@ const WorkspaceLayout = () => {
   const email = jwtDecode(getToken()).sub;
   const [alarmList, setAlarmList] = useState([]);
   const toast = useToast();
-
   useEffect(() => {
     const address = `${import.meta.env.VITE_SERVER_ADDRESS}/notification`;
     const params = `?email=${email}&workSpaceId=${workSpaceId}`;
@@ -117,6 +117,8 @@ const WorkspaceLayout = () => {
     };
   }, [toast, workSpaceId]);
 
+  //
+  useSmallScreenGuard();
   return (
     <Fragment>
       {isAuthChecked && isMemberChecked ? (
