@@ -11,6 +11,7 @@ function TextInput({ name, value, onChange, placeholder, ...props }, ref) {
       onChange={onChange}
       placeholder={placeholder}
       ref={ref}
+      autoComplete="off"
     />
   );
 }
