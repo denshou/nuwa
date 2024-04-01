@@ -6,9 +6,11 @@ import { Flex, Text, Button } from '@chakra-ui/react';
 import WorkspaceCard from './WorkspaceCard';
 import { jwtDecode } from 'jwt-decode';
 import { getToken } from '@utils/auth';
+import useSmallScreenGuard from '../../hooks/useSmallScreenGuard';
 //import { workspace_section } from '@constants/selectPlan/SELECT_ALL_INFO';
 
 const WorkAccess = () => {
+  useSmallScreenGuard();
   const [workspaces, setWorkspaces] = useState([]);
   const [loading, setLoading] = useState(true);
 
