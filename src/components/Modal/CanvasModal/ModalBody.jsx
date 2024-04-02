@@ -13,7 +13,7 @@ const ModalBody = ({ onClose }) => {
   const queryClient = useQueryClient();
   // useMutation을 사용하여 createCanvas 함수를 비동기적으로 실행
   const { mutate, isLoading, error } = useMutation({
-    mutationFn: () => createCanvas(workSpaceId, title, content),
+    mutationFn: () => createCanvas(workSpaceId, title, JSON.stringify(content)),
     onSuccess: (data) => {
       // 성공 처리 로직
       if (data.success) {
@@ -33,11 +33,11 @@ const ModalBody = ({ onClose }) => {
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleContentChange = (newContent) => {
-    setContent(newContent.ops.map((op) => op.insert).join(''));
+    setContent(newContent);
   };
 
   const handleSubmit = () => {
-    if (!title.trim() || !content.trim()) {
+    if (!title.trim()) {
       alert('제목과 내용을 모두 입력해주세요.');
       return;
     }

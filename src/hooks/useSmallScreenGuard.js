@@ -5,7 +5,7 @@ const useSmallScreenGuard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(window.innerWidth);
+    // console.log(window.innerWidth);
     if (window.innerWidth < 500) {
       navigate('/');
       alert('모바일에서는 아직 지원되지 않습니다. 웹에서 사용해주세요.');

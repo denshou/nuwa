@@ -13,7 +13,7 @@ const ModalBody = ({
   canvasId,
 }) => {
   const [title, setTitle] = useState(initialTitle);
-  const [content, setContent] = useState(initialContent);
+  const [content, setContent] = useState(JSON.parse(initialContent));
   const { workSpaceId } = useParams();
   const queryClient = useQueryClient();
 
@@ -32,8 +32,8 @@ const ModalBody = ({
   const handleTitleChange = (e) => setTitle(e.target.value);
 
   const handleContentChange = (newContent) => {
-    const extractedText = newContent.ops.map((op) => op.insert).join('');
-    setContent(extractedText);
+    // const extractedText = newContent.ops.map((op) => op.insert).join('');
+    setContent(newContent);
   };
   const handleSubmit = () => {
     mutate();

@@ -15,7 +15,7 @@ const UserInfo = () => {
     isSuccess,
   } = useWorkspaceUserProfileQuery(workSpaceId);
 
-  console.log(profileData);
+  // console.log(profileData);
   return (
     <>
       <Flex
