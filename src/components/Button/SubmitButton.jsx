@@ -3,12 +3,12 @@ import { Button, Text } from '@chakra-ui/react';
 const SubmitButton = ({ isSubmitting, isSubmitted, isValid, isDirty }) => {
   return (
     <>
-      {!isSubmitting && !isSubmitted ? (
+      {!isSubmitting ? (
         <Button
           height={'52px'}
           type="submit"
           colorScheme="secondary"
-          isDisabled={!isValid || !isDirty}
+          // isDisabled={isValid}
         >
           <Text
             color={'white'}

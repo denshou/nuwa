@@ -17,6 +17,7 @@ import chat_ch from '../../assets/chat_ch.svg';
 import voice_ch from '../../assets/voice_ch.svg';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGroupChatListQuery } from '@queries/groupChat.js/useGroupChatList';
+import useBoundStore from '../../store/store';
 
 const ChatChannel = ({ type }) => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const ChatChannel = ({ type }) => {
   const handleChange = () => {
     setChannelHidden((prev) => !prev);
   };
-
+  const setMessageIndex = useBoundStore((state) => state.setMessageIndex);
   const {
     data: chatChList,
     isSuccess,
@@ -98,6 +99,7 @@ const ChatChannel = ({ type }) => {
                 justifyContent="flex-start"
                 backgroundColor="#f1f1f1"
                 onClick={() => {
+                  setMessageIndex(0);
                   navigate(`/workspace/${workSpaceId}/groupChat/${x.roomId}`);
                 }}
               >

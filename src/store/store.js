@@ -8,6 +8,8 @@ import { createUserAuthSlice } from './userAuthSlice';
 import { createSSEAlarmSlice } from './serverSentEventAlarmSlice';
 import { createDirectChatSlice } from './directChatSlice';
 import { createInviteSlice } from './createInviteSlice';
+import { createMessageIndexSlice } from './messageIndex';
+import { createUploadFileSlice } from './createUploadFileSlice';
 
 const persistKeys = [
   'email',
@@ -41,6 +43,8 @@ const useBoundStore = create(
           ...createSSEAlarmSlice(...a),
           ...createDirectChatSlice(...a),
           ...createInviteSlice(...a),
+          ...createMessageIndexSlice(...a),
+          ...createUploadFileSlice(...a),
         }),
         persistOption
       )

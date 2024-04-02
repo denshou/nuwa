@@ -14,13 +14,19 @@ import InviteMemberList from '@components/Card/InviteMemberCard';
 import { useState } from 'react';
 import { Button } from '@chakra-ui/button';
 import { joinInGroupChat } from '@apis/chat/groupChat';
+import { useMemberNotInGroupQuery } from '../../../queries/groupChat.js/useMemberNotInGroup';
 
 const InviteMemberModal = ({ isOpen, onClose }) => {
   const [selectedList, setSelectedList] = useState([]);
   const { chatRoomInfo } = useLoaderData();
   const { memberList: groupMemberList } = chatRoomInfo;
-  const { workSpaceId } = useParams();
+  const { workSpaceId, roomId } = useParams();
 
+  const { data: test, isSuccess } = useMemberNotInGroupQuery(
+    workSpaceId,
+    roomId
+  );
+  console.log(test);
   const { memberList: workSpaceMemberList, isSuccess: memberListIsSuccess } =
     useWorkSpaceMemberListQuery(workSpaceId);
 
@@ -51,37 +57,44 @@ const InviteMemberModal = ({ isOpen, onClose }) => {
               },
             }}
           >
-            {memberListIsSuccess &&
-            workSpaceMemberList.filter((item) => {
-              return !groupMemberList.includes(item.id);
-            }).length !== 0 ? (
-              workSpaceMemberList
-                .filter((item) => {
-                  return !groupMemberList.includes(item.id);
-                })
-                .map((member) => {
-                  return (
-                    <InviteMemberList
-                      key={member.email}
-                      id={member.id}
-                      name={member.name}
-                      onClose={onClose}
-                      selectedList={selectedList}
-                      setSelectedList={setSelectedList}
-                    />
-                  );
-                })
-            ) : (
-              <Flex
-                justifyContent={'center'}
-                alignItems={'center'}
-                height={'50vh'}
-              >
-                <Text fontSize={'16px'} color={'grey.400'} textAlign={'center'}>
-                  초대할 멤버가 없습니다
-                </Text>
-              </Flex>
-            )}
+            {
+              // isSuccess &&
+              memberListIsSuccess &&
+              workSpaceMemberList.filter((item) => {
+                return !groupMemberList.includes(item.id);
+              }).length !== 0 ? (
+                workSpaceMemberList
+                  .filter((item) => {
+                    return !groupMemberList.includes(item.id);
+                  })
+                  .map((member) => {
+                    return (
+                      <InviteMemberList
+                        key={member.email}
+                        id={member.id}
+                        name={member.name}
+                        onClose={onClose}
+                        selectedList={selectedList}
+                        setSelectedList={setSelectedList}
+                      />
+                    );
+                  })
+              ) : (
+                <Flex
+                  justifyContent={'center'}
+                  alignItems={'center'}
+                  height={'50vh'}
+                >
+                  <Text
+                    fontSize={'16px'}
+                    color={'grey.400'}
+                    textAlign={'center'}
+                  >
+                    초대할 멤버가 없습니다
+                  </Text>
+                </Flex>
+              )
+            }
           </Stack>
         </ModalBody>
         <ModalFooter>

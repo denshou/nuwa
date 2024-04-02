@@ -146,17 +146,20 @@ const renderingFilesByGrid = (
     }
     return (
       <Wrap spacing="40px">
-        {renderedFiles.map((x, index) => (
-          <FileBox
-            key={index}
-            fileName={x.fileName}
-            fileMemberUploadName={x.fileMemberUploadName}
-            createdAt={x.createdAt}
-            fileExtension={x.fileExtension}
-            fileSize={x.fileSize}
-            fileUrl={x.fileUrl}
-          />
-        ))}
+        {renderedFiles.map((x, index) => {
+          console.log(x);
+          return (
+            <FileBox
+              key={index}
+              fileName={x.fileName}
+              fileMemberUploadName={x.fileMemberUploadName}
+              createdAt={x.createdAt}
+              fileExtension={x.fileExtension}
+              fileSize={x.fileSize}
+              fileUrl={x.fileUrl}
+            />
+          );
+        })}
         {currentPage[index] < stack.length - 1 && (
           <Box
             width={'245px'}

@@ -13,7 +13,7 @@ const useDeleteGroupChatMessage = ({
         for (let deleteItem of socketMessageDeleteList) {
           newState.forEach((item) => {
             if (item.messageId === deleteItem.id) {
-              item.messageId = item.messageId + 'delete';
+              item.key = item.key + 'delete';
               item.isDeleted = true;
               item.content = deleteItem.content;
             }
@@ -26,7 +26,7 @@ const useDeleteGroupChatMessage = ({
         for (let deleteItem of socketMessageDeleteList) {
           groupChatMessageList.forEach((item) => {
             if (item.messageId === deleteItem.id) {
-              item.messageId = item.messageId + 'delete';
+              item.key = item.key + 'delete';
 
               item.isDeleted = true;
               item.content = deleteItem.content;

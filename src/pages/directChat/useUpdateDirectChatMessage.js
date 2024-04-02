@@ -13,7 +13,7 @@ const useUpdateDirectChatMessage = ({
         for (let updateItem of socketMessageUpdateList) {
           newState.forEach((item) => {
             if (item.messageId === updateItem.id) {
-              item.messageId = item.messageId + 'update';
+              item.key = item.key + 'update';
               item.content = updateItem.content;
             }
             return item;
@@ -25,7 +25,7 @@ const useUpdateDirectChatMessage = ({
         for (let updateItem of socketMessageUpdateList) {
           directChatMessageList.forEach((item) => {
             if (item.messageId === updateItem.id) {
-              item.messageId = item.messageId + 'update';
+              item.key = item.key + 'update';
               item.content = updateItem.content;
             }
             return item;

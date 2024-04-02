@@ -38,7 +38,6 @@ const FileBox = ({
   const [isHovered, setIsHovered] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedImg, setSelectedImg] = useState('');
-
   return (
     <Box
       w="245px"
@@ -53,7 +52,9 @@ const FileBox = ({
         );
       }}
     >
-      {fileExtension === ('jpg' || 'png' || 'jpeg') && (
+      {(fileExtension === 'jpg' ||
+        fileExtension === 'png' ||
+        fileExtension === 'jpeg') && (
         <Modal
           isOpen={isOpen}
           onClose={onClose}
@@ -70,12 +71,15 @@ const FileBox = ({
               </Box>
             </Flex>
           }
-          children={<Image src={selectedImg} objectFit="cover" />}
-        />
+        >
+          <Image src={selectedImg} objectFit="cover" />
+        </Modal>
       )}
       <Center h="136px" backgroundColor="#D6D6D6" borderRadius="13px 13px 0 0">
         {fileExtension === 'pdf' && <Image src={AdobeIcon} />}
-        {fileExtension === ('jpg' || 'png' || 'jpeg') && (
+        {(fileExtension === 'jpg' ||
+          fileExtension === 'png' ||
+          fileExtension === 'jpeg') && (
           <Image
             src={fileUrl}
             w="245px"

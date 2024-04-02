@@ -2,12 +2,16 @@ import { forwardRef, useEffect, useLayoutEffect, useRef } from 'react';
 import Quill from 'quill';
 import { useParams } from 'react-router-dom';
 import { imageMatcher } from '@components/TextEditorFunctionalComponent/quill/clipboard';
-
+import { imageHandler } from '../TextEditorFunctionalComponent/quill/customOptions';
+import useBoundStore from '../../store/store';
+/// 캔버스 수정 쪽 에디터
 const Editor = forwardRef(
   (
     { readOnly, onTextChange, onSelectionChange, channelId, defaultValue },
     ref
   ) => {
+    const uploadType = useBoundStore((state) => state.uploadType);
+
     const { workSpaceId } = useParams();
 
     const containerRef = useRef(null);
@@ -29,14 +33,33 @@ const Editor = forwardRef(
       const editorContainer = container.appendChild(
         container.ownerDocument.createElement('div')
       );
-
       const quill = new Quill(editorContainer, {
+        externalLayer: { uploadType },
         theme: 'snow',
-        modules: {},
+        modules: {
+          toolbar: {
+            container: [
+              ['bold', 'italic', 'underline', 'strike'],
+              ['blockquote', 'code-block'],
+              [{ list: 'ordered' }, { list: 'bullet' }],
+            ],
+            // handlers: {
+            //   image: imageHandler,
+            // },
+          },
+        },
       });
 
-      quill.clipboard.addMatcher('img', function (node) {
-        return imageMatcher(node, quill, workSpaceId, channelId);
+      // quill.clipboard.addMatcher('img', function (node) {
+      //   return imageMatcher(node, quill, workSpaceId, channelId, uploadType);
+      // });
+      quill.clipboard.addMatcher('IMG', (node, delta) => {
+        const Delta = Quill.import('delta');
+        return new Delta().insert('');
+      });
+      quill.clipboard.addMatcher('PICTURE', (node, delta) => {
+        const Delta = Quill.import('delta');
+        return new Delta().insert('');
       });
       ref.current = quill;
 
@@ -57,7 +80,20 @@ const Editor = forwardRef(
       };
     }, []);
 
-    return <div id="canvas-editor" ref={containerRef}></div>;
+    useEffect(() => {
+      const handleEmptyEditorClick = () => {
+        ref.current.focus({ preventScroll: true });
+        ref.current.setSelection(ref.current.getLength(), 0);
+      };
+      const element = document.querySelector('.canvas .ql-container.ql-snow');
+      element.addEventListener('click', handleEmptyEditorClick);
+
+      return () => {
+        element.removeEventListener('click', handleEmptyEditorClick);
+      };
+    }, []);
+
+    return <div id="canvas-editor" className="canvas" ref={containerRef}></div>;
   }
 );
 

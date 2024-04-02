@@ -110,11 +110,11 @@ const ComponentFavorite = () => {
                   height={'80%'}
                   minW={'200px'}
                   padding={'auto'}
-                  justifyContent={'center'}
+                  justifyContent={'space-between'}
                   alignItems={'center'}
                   borderRadius={'12px'}
-                  gap={'22px'}
                   border={'2px solid #D6D6D6'}
+                  p={'1rem'}
                 >
                   <Avatar
                     name={member.name}

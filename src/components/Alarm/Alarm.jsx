@@ -10,18 +10,22 @@ import {
   CloseButton,
   Divider,
   Box,
+  Button,
 } from '@chakra-ui/react';
 import { FaBell } from 'react-icons/fa6';
 import AlarmData from '@components/DataBox/AlarmData';
 import { useParams } from 'react-router-dom';
-import { fetchAlarms, markNotificationsAsRead } from '@apis/alarm/getAlarm';
+import {
+  fetchAlarms,
+  markNotificationsAsRead,
+  readAllNotification,
+} from '@apis/alarm/getAlarm';
 
 const Alarm = () => {
   const { workSpaceId } = useParams();
   const [size, setSize] = useState('');
   const [alarmData, setAlarmData] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const handleClick = async (newSize) => {
     setSize(newSize);
     try {
@@ -76,6 +80,15 @@ const Alarm = () => {
             <Text fontSize={'lg'} fontWeight={'bold'}>
               알림
             </Text>
+            <Button
+              onClick={() => {
+                readAllNotification(workSpaceId);
+                onClose();
+              }}
+              fontSize={'sm'}
+            >
+              모두 읽음 처리
+            </Button>
             <CloseButton onClick={onClose} />
           </Flex>
           <Divider orientation="horizontal" mb={'10px'} />
@@ -93,13 +106,9 @@ const Alarm = () => {
                     type={alarm.notificationType}
                     partner={alarm.senderName}
                     count={alarm.contentCount}
-                    onRead={() =>
-                      handleReadNotification(
-                        alarm.notificationId,
-                        alarm.notificationType,
-                        setIsRead
-                      )
-                    }
+                    notificationId={alarm.notificationId}
+                    onRead={handleReadNotification}
+                    onClose={onClose}
                   />
                 ))}
               </Box>

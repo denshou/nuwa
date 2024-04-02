@@ -14,7 +14,13 @@ const Delta = Quill.import('delta');
  *
  * image match
  */
-export const imageMatcher = (node, quill, workSpaceId, channelId) => {
+export const imageMatcher = (
+  node,
+  quill,
+  workSpaceId,
+  channelId,
+  uploadType
+) => {
   const [blob, type] = dataURItoBlob(node.getAttribute('src'));
   const formData = new FormData();
   const fileRequestDto = {
@@ -28,7 +34,7 @@ export const imageMatcher = (node, quill, workSpaceId, channelId) => {
   );
   const [file] = validateFiles([new File([blob], `image.${type}`)]);
   formData.append('fileList', file);
-  uploadFile('DIRECT', channelId, formData).then((r) => {
+  uploadFile(uploadType, channelId, formData).then((r) => {
     const data = r.data.data;
     console.log(data);
     quill.updateContents(

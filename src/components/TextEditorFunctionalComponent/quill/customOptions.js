@@ -30,8 +30,9 @@ export const myOptions = {
   },
 };
 
-function imageHandler() {
-  const { workSpaceId, channelId } = this.quill.options.externalLayer;
+export function imageHandler() {
+  const { workSpaceId, channelId, uploadType } =
+    this.quill.options.externalLayer;
   const fileRequestDto = {
     workSpaceId,
   };
@@ -65,7 +66,7 @@ function imageHandler() {
         fileInput.value = null;
 
         const imageUrlArray = await uploadFile(
-          'DIRECT',
+          uploadType,
           channelId,
           formData
         ).then((r) => r.data.data);

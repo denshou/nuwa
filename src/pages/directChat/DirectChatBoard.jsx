@@ -9,7 +9,7 @@ import ChatPreviewBox from '../chatBoard/ChatPreviewBox';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const DirectChatBoard = () => {
-  const { setIsDirectChatBoxExpand } = useBoundStore();
+  const { setIsDirectChatBoxExpand, setMessageIndex } = useBoundStore();
   const { workSpaceId } = useParams();
   const navigate = useNavigate();
   const {
@@ -88,6 +88,7 @@ const DirectChatBoard = () => {
                 createMemberId={chat.createMemberId}
                 joinMemberId={chat.joinMemberId}
                 onClick={() => {
+                  setMessageIndex(0);
                   navigate(
                     `/workspace/${workSpaceId}/direct-chat/${chat.roomId}`
                   );

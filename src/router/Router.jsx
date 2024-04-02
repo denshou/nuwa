@@ -209,7 +209,11 @@ export const Router = createBrowserRouter([
               const isGroupMember = chatRoomInfo.memberList.includes(
                 userProfile.id
               );
-              return { userProfile, chatRoomInfo, isGroupMember };
+              return {
+                userProfile,
+                chatRoomInfo,
+                isGroupMember,
+              };
             },
           },
         ],

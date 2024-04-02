@@ -38,13 +38,12 @@ export const useDirectChatMessageInfiniteQuery = (
       queryFn: ({ pageParam = fetchUrl }) =>
         request.get(pageParam).then((r) => r.data.data),
       getNextPageParam: (lastPage) => {
-        if (lastPage.last) {
+        if (lastPage?.last) {
           return undefined;
         } else {
           return fetchUrl;
         }
       },
-      gcTime: 0,
     });
   return {
     data,

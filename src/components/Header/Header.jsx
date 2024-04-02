@@ -17,7 +17,7 @@ const Header = () => {
   };
   const handleLogoutButton = () => {
     logoutRequest();
-    removeToken();
+    // removeToken(); 로그아웃에서 처리
     setIsLoggedIn(false);
     navigate('/login');
   };

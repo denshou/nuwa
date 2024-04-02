@@ -17,7 +17,16 @@ import useModal from '@hooks/useModal';
 import { useParams } from 'react-router-dom';
 import useCanvasData from '@hooks/canvas/useCanvasData';
 import CanvasEditModal from '@components/Modal/EditCanvas/index.jsx';
+import useBoundStore from '../../store/store';
 const Canvas = () => {
+  const { setUploadType, uploadType } = useBoundStore();
+
+  useEffect(() => {
+    if (uploadType !== 'CANVAS') {
+      setUploadType('CANVAS');
+    }
+  }, []);
+
   const { isOpen, onOpen, onClose } = useModal();
   const {
     isOpen: isEditModalOpen,
@@ -175,7 +184,6 @@ const DataContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  cursor: pointer;
   overflow-y: auto;
 `;
 
