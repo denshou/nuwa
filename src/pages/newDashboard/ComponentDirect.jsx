@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Text, Flex, Image } from '@chakra-ui/react';
-import DirectMessageIcon from '@assets/message_icon.svg';
-import { fetchCanvases } from '@apis/dashboard/fetchCanvases';
+import DirectMessageIcon from '@assets/message_icon.svg'; // 경로에 따라 수정해주세요.
+import { fetchCanvases } from '@apis/dashboard/fetchCanvases'; // 경로에 따라 수정해주세요.
 
 const ComponentDirect = () => {
   const [canvases, setCanvases] = useState([]);
@@ -12,12 +12,18 @@ const ComponentDirect = () => {
     const fetchData = async () => {
       try {
         const response = await fetchCanvases(workSpaceId);
-        const canvasMessages = response.data.data.map((canvas) => ({
-          id: canvas.canvasId,
-          title: canvas.canvasTitle,
-          content: canvas.canvasContent,
-          createdAt: canvas.createdAt,
-        }));
+        const canvasMessages = response.data.data.map((canvas) => {
+          // JSON 문자열을 객체로 파싱
+          const contentObject = JSON.parse(canvas.canvasContent);
+          // ops 배열 내의 모든 insert 값 추출 및 하나의 문자열로 결합
+          const contentText = contentObject.ops.map((op) => op.insert).join('');
+          return {
+            id: canvas.canvasId,
+            title: canvas.canvasTitle,
+            content: contentText, // 수정된 부분
+            createdAt: canvas.createdAt,
+          };
+        });
         setCanvases(canvasMessages);
       } catch (error) {
         console.error('캔버스 데이터 조회 중 오류가 발생했습니다.', error);
@@ -65,10 +71,10 @@ const ComponentDirect = () => {
               <Flex flexFlow={'column'} width={'100%'}>
                 <Flex align={'center'} justify={'space-between'}>
                   <Text fontSize={'16px'} fontWeight={'700'}>
-                    {canvas.title}{' '}
+                    {canvas.title}
                   </Text>
                 </Flex>
-                <Text width={'80%'}>{canvas.content} </Text>
+                <Text width={'80%'}>{canvas.content}</Text>
               </Flex>
             </Box>
           ))

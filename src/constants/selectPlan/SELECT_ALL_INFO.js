@@ -37,52 +37,42 @@ export const categories = [
 
 export const footer_categories =[
     {
-        text1: "NUWA",
-        text2: "NUWA의 장점",
-        text3: "채널",
-        text4: "참여",
-        text5: "확장성",
-        text6: "영상 시청하기",
+        text1: "NUWA를 위한 서비스",
+        text2: "NUWA_Pro 사용해 보기",
+        text3: "채널 찾기",
+        text4: "신규 채용",
+        text5: "서비스 문의",
+        text6: "관리자 페이지",
 
     },
 
     {
-        text1: "NUWA",
-        text2: "NUWA의 장점",
-        text3: "채널",
-        text4: "참여",
-        text5: "확장성",
-        text6: "영상 시청하기",
+        text1: "인재 찾기",
+        text2: "채용 공고",
+        text3: "프론트엔드 공고",
+        text4: "디자이너 공고",
+        text5: "백엔드 공고",
+        text6: "기획안 확인하기",
 
     },
 
     {
-        text1: "NUWA",
-        text2: "NUWA의 장점",
-        text3: "채널",
-        text4: "참여",
-        text5: "확장성",
-        text6: "영상 시청하기",
+        text1: "NUWA의 정보",
+        text2: "앱 다운로드",
+        text3: "블로그",
+        text4: "도움말 센터",
+        text5: "문의",
+        text6: "포트폴리오",
 
     },
 
     {
-        text1: "NUWA",
-        text2: "NUWA의 장점",
-        text3: "채널",
-        text4: "참여",
-        text5: "확장성",
-        text6: "영상 시청하기",
-
-    },
-
-    {
-        text1: "NUWA",
-        text2: "NUWA의 장점",
-        text3: "채널",
-        text4: "참여",
-        text5: "확장성",
-        text6: "영상 시청하기",
+        text1: "소셜",
+        text2: "Instagram",
+        text3: "twitter",
+        text4: "Pinterest",
+        text5: "Behance",
+        text6: "Facebook",
 
     }
 ]
