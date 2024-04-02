@@ -12,7 +12,7 @@ const EditCanvasEditor = ({ onContentChange, initialContent }) => {
   const [lastChange, setLastChange] = useState();
 
   const quillRef = useRef();
-  const defaultValue = new Delta().insert(initialContent);
+  const defaultValue = initialContent;
 
   useEffect(() => {
     if (quillRef.current) {
