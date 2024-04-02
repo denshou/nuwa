@@ -38,6 +38,7 @@ const FeatCenter = () => {
             color="white"
             borderRadius="full"
             bgColor="#575DFB"
+            cursor={'pointer'}
           >
             무료로 시작하기
           </Button>

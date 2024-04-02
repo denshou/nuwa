@@ -48,9 +48,11 @@ const InputSection = ({ onSendInquiry }) => {
         <Textarea
           name="content"
           width="100%"
+          height={'100px'}
           placeholder="문의내용"
-          className="textArea"
           defaultValue=""
+          border={'1px solid #ccc'}
+          borderRadius="md"
         />
       </Flex>
 

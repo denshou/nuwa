@@ -12,7 +12,10 @@ const WorkspaceCard = ({ workspace_section }) => {
   const { workSpaceMemberImage } = workspace;
 
   return (
-    <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+    <Grid
+      templateColumns={{ SE: 'repeat(2, 1fr)', sm: 'repeat(3, 1fr)' }}
+      gap={{ SE: '2', sm: '6' }}
+    >
       <CardContainer>
         <Flex
           flexDirection={'column'}
@@ -21,16 +24,16 @@ const WorkspaceCard = ({ workspace_section }) => {
           gap={'32px'}
         >
           <Link to="/create-workspace">
-            <Box
-              as="img"
-              width={'98px'}
-              height={'98px'}
-              border={'1px solid #FFFFFF'}
-              borderRadius={'full'}
+            <Avatar
+              border={'1px solid #ccc'}
+              size={{ SE: 'lg', sm: 'lg', md: 'lg', lg: 'xl' }}
               src={workspaceAdd}
             />
           </Link>
-          <Text fontSize="18px" fontWeight="700">
+          <Text
+            fontSize={{ SE: '12px', sm: '14px', md: '16px', lg: '18px' }}
+            fontWeight="700"
+          >
             워크스페이스 생성
           </Text>
         </Flex>
@@ -51,7 +54,7 @@ const WorkspaceCard = ({ workspace_section }) => {
                 // height={'120px'}
                 border={'1px solid #ccc'}
                 name={item.workSpaceName}
-                size={'xl'}
+                size={{ SE: 'lg', sm: 'lg', md: 'lg', lg: 'xl' }}
                 // src=''
                 // borderRadius={'full'}
                 // backgroundImage={`url(${workSpaceImage || ''})`}
@@ -68,7 +71,7 @@ const WorkspaceCard = ({ workspace_section }) => {
               // border={'1px solid black'}
             >
               <Text
-                fontSize="20px"
+                fontSize={{ SE: '14px', sm: '16px', md: '18px', lg: '20px' }}
                 fontWeight="700"
                 isTruncated
                 maxWidth="150px"
@@ -100,5 +103,4 @@ const CardContainer = styled.div`
   border: 1px solid #ccc;
   box-shadow: 10px 12px 33px 0px rgba(102, 102, 102, 0.1);
   border-radius: 12px;
-  margin: 30px 28px;
 `;
