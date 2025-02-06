@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/59d650de-0d94-49c2-8e03-c305afc4fd17)
+![image](https://github.com/user-attachments/assets/b19ea459-1a8b-495d-af67-8cef3deaf8a2)
 
 
 ## node version
